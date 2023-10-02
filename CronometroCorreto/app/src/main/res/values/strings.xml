@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CronometroCorreto</string>
+    <string name="start_button">start</string>
+    <string name="pause_button">pause</string>
+    <string name="reset_button">reset</string>
+    <string name="working">working</string>
+    <string name="stopped">stopped</string>
+</resources>
