@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CronometroCorreto</string>
+    <string name="start_button">começar</string>
+    <string name="pause_button">pausar</string>
+    <string name="reset_button">reiniciar</string>
+    <string name="working">funcionando</string>
+    <string name="stopped">parado</string>
+    <string name="reset">reiniciado</string>
+</resources>
