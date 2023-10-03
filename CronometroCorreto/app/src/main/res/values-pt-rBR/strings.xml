@@ -7,4 +7,7 @@
     <string name="working">funcionando</string>
     <string name="stopped">parado</string>
     <string name="reset">reiniciado</string>
+    <string name="note_button">volta</string>
+    <string name="time_log">tempos</string>
+    <string name="lap_count">volta adicionada</string>
 </resources>

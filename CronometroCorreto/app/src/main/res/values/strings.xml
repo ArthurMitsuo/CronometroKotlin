@@ -6,4 +6,7 @@
     <string name="working">working</string>
     <string name="stopped">stopped</string>
     <string name="reset">reset</string>
+    <string name="note_button">lap</string>
+    <string name="time_log">time log</string>
+    <string name="lap_count">lap added</string>
 </resources>

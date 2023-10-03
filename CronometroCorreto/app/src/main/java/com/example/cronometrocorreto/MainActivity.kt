@@ -14,42 +14,85 @@ import org.w3c.dom.Text
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
-    var tempoPausado = 0;
-    var tempoResetado = false;
+    private lateinit var timeTextView: TextView
+    private lateinit var startButton: Button
+    private lateinit var resetButton: Button
+    private lateinit var noteButton: Button
+    private lateinit var timeLog: TextView
+    private var isRunning = false
+    private var startTime: Long = 0
+    private var elapsedTime: Long = 0
+    private val handler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val cronometro = findViewById<Chronometer>(R.id.chronometer)
-        val btnStart = findViewById<Button>(R.id.startButton)
-        val btnReset = findViewById<Button>(R.id.resetButton)
-        var isWorking = false
-        var resetado = false
+        timeTextView = findViewById(R.id.chronometer)
+        startButton = findViewById(R.id.startButton)
+        resetButton = findViewById(R.id.resetButton)
+        noteButton = findViewById(R.id.noteButton)
+        timeLog = findViewById(R.id.timeLog)
 
-        btnStart.setOnClickListener(){
-            if(!isWorking){
-                cronometro.base = SystemClock.elapsedRealtime()-tempoPausado
-                cronometro.start()
-                isWorking = true
+        startButton.setOnClickListener {
+            if (!isRunning) {
+                if (elapsedTime == 0L) {
+                    startTime = SystemClock.elapsedRealtime()
+                } else {
+                    startTime = SystemClock.elapsedRealtime() - elapsedTime
+                }
+                handler.postDelayed(updateTimer, 0)
+                resetButton.isEnabled = true
+                noteButton.isEnabled = true
+                isRunning = true
             }else{
-                cronometro.stop()
-                tempoPausado = (SystemClock.elapsedRealtime() - cronometro.base).toInt()
-                isWorking = false
+                handler.removeCallbacks(updateTimer)
+                elapsedTime = SystemClock.elapsedRealtime() - startTime
+                resetButton.isEnabled = true
+                noteButton.isEnabled = true
+                isRunning = false
             }
-            btnStart.setText(if(!isWorking){R.string.start_button} else {R.string.pause_button})
-            Toast.makeText(this, getString(if(isWorking)R.string.working else R.string.stopped), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(if(isRunning)R.string.working else R.string.stopped), Toast.LENGTH_SHORT).show()
+            startButton.setText(if(!isRunning){R.string.start_button} else {R.string.pause_button})
         }
 
-        btnReset.setOnClickListener(){
-            cronometro.stop()
-            cronometro.base = SystemClock.elapsedRealtime()
-            isWorking = false
-            resetado = true
 
-            btnReset.setText(R.string.reset_button)
-            btnStart.setText(if(!isWorking){R.string.start_button} else {R.string.pause_button})
-            Toast.makeText(this, getString(if(resetado)R.string.working else R.string.stopped), Toast.LENGTH_SHORT).show()
-            resetado = false
+        resetButton.setOnClickListener {
+            handler.removeCallbacks(updateTimer)
+            elapsedTime = 0
+            timeTextView.text = "00:00:000"
+            timeLog.text = getString(R.string.time_log)
+            startButton.isEnabled = true
+            resetButton.isEnabled = false
+            noteButton.isEnabled = false
+            isRunning = false
+
+            Toast.makeText(this, R.string.reset, Toast.LENGTH_SHORT).show()
+            startButton.setText(if(!isRunning){R.string.start_button} else {R.string.pause_button})
+        }
+
+        noteButton.setOnClickListener {
+            val currentTime = timeTextView.text.toString()
+            val previousTimeLog = timeLog.text.toString()
+            val newTimeLog = "$previousTimeLog\n$currentTime"
+            timeLog.text = newTimeLog
+
+            Toast.makeText(this, R.string.lap_count, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val updateTimer = object : Runnable {
+        override fun run() {
+            val timeInMilliseconds = SystemClock.elapsedRealtime() - startTime
+            val updatedTime = elapsedTime + timeInMilliseconds
+            val seconds = (updatedTime / 1000).toInt()
+            val minutes = seconds / 60
+            val milliseconds = (updatedTime % 1000).toInt()
+            val secondsDisplay = seconds % 60
+            val timerText =
+                String.format("%02d:%02d:%03d", minutes, secondsDisplay, milliseconds)
+            timeTextView.text = timerText
+            handler.postDelayed(this, 0)
         }
     }
 }
