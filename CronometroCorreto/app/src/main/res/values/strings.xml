@@ -10,7 +10,10 @@
     <string name="time_log">time log</string>
     <string name="lap_count">lap added</string>
     <string name="button_chronometer">chronometer</string>
+    <string name="button_timer">timer</string>
     <string name="return_button">return</string>
     <string name="returning">returning</string>
     <string name="name_field">name</string>
+    <string name="timer_input">type a number (in seconds) to countdown</string>
+    <string name="timer_warn">already running</string>
 </resources>

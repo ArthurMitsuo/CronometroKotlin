@@ -16,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/button_timer"
+        android:layout_width="154dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="88dp"
+        android:text="@string/button_timer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_chronometer" />
+
     <EditText
         android:id="@+id/name_field"
         android:layout_width="295dp"

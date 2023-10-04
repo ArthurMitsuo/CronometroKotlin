@@ -21,11 +21,12 @@ class Menu : AppCompatActivity() {
         var sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
 
 
-        val button = findViewById<Button>(R.id.button_chronometer)
+        val buttonC = findViewById<Button>(R.id.button_chronometer)
+        val buttonT = findViewById<Button>(R.id.button_timer)
         var name: EditText = findViewById(R.id.name_field)
         var nameStr : String
 
-        button.setOnClickListener {
+        buttonC.setOnClickListener {
             val editor = sharedPreferences.edit()
             nameStr = name.text.toString()
 
@@ -33,6 +34,17 @@ class Menu : AppCompatActivity() {
             editor.commit()
 
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonT.setOnClickListener {
+            val editor = sharedPreferences.edit()
+            nameStr = name.text.toString()
+
+            editor.putString("name", nameStr)
+            editor.commit()
+
+            val intent = Intent(this, Temporizado::class.java)
             startActivity(intent)
         }
     }

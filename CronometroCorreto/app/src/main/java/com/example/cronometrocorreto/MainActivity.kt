@@ -16,6 +16,7 @@ import org.w3c.dom.Text
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    //criação das variáveis globais, privadas, para uso.
     private lateinit var timeTextView: TextView
     private lateinit var startButton: Button
     private lateinit var resetButton: Button
@@ -25,10 +26,6 @@ class MainActivity : AppCompatActivity() {
     private var startTime: Long = 0
     private var elapsedTime: Long = 0
     private val handler = Handler()
-
-    val SHARED: String = "sharedPrefs"
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         timeLog = findViewById(R.id.timeLog)
         val campoNome: TextView = findViewById(R.id.textView2)
 
+        //Pega com o SharedPreferences o dado enviado, no caso, o nome da pessoa, para mostrar na tela
         val sharedPreferences = applicationContext.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val valor = sharedPreferences.getString("name","desconhecido")
 
@@ -51,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        //Bloco que pega o botão return pelo ID e encerra a activity quando nota que ele é clicado
         val button = findViewById<Button>(R.id.return_button)
         button.setOnClickListener {
             Toast.makeText(this, R.string.returning, Toast.LENGTH_SHORT).show()
@@ -58,7 +57,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         startButton.setOnClickListener {
+            //Verifica se a variável Booleana é false ou true.
+            //Caso seja false, significa estar parado.
             if (!isRunning) {
+
+                //caso haja um tempo definido no cronometro, pós pause, utiliza o SystemClock.elapsedRealtime() - elapsedTime
+                //SystemClock.elapsedRealtime() é uma funcionalidade que pega o tempo do sistema, corrido, a subtração é com a finalidade de mostrar o tempo que foi pausado.
+                //Caso não haja, zerará, ou simplesmente continuará rodando, mesmo pausado, quando retornar, o tempo estará mais avançado.
                 if (elapsedTime == 0L) {
                     startTime = SystemClock.elapsedRealtime()
                 } else {
