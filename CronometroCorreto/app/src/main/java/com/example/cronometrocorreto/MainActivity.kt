@@ -79,6 +79,8 @@ class MainActivity : AppCompatActivity() {
                 noteButton.isEnabled = true
                 isRunning = true
             }else{
+                //remove a atualização do relógio, pausando ele. Sala o tempo decorrido, em relação ao tempo do sistema, para quando iniciar de novo
+                //muda o estado da variável para falso, pois está parado
                 handler.removeCallbacks(updateTimer)
                 elapsedTime = SystemClock.elapsedRealtime() - startTime
                 resetButton.isEnabled = true
@@ -103,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             noteButton.isEnabled = false
             isRunning = false
 
-            //indica em TOAST que foi resetado
+            //indica em TOAST que foi resetado e muda o texto do botão de iniciar
             Toast.makeText(this, R.string.reset, Toast.LENGTH_SHORT).show()
             startButton.setText(if(!isRunning){R.string.start_button} else {R.string.pause_button})
         }
@@ -121,18 +123,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     //funcuionalidade utilizando o objeto updateTimer do tipo da classe Runnable, onde muda o estado do relógio a cada atualização.
-    //atualização esta que foi definida no handler como sendo a cada 0 milisegundos (incremento em milisegundos)
+    //atualização esta que foi definida no handler como sendo a cada 0 milisegundos. (incremento em milisegundos)
     private val updateTimer = object : Runnable {
         override fun run() {
+            //primeiro pega a referência com o sistema, depois dá update(se vier do pause, utiliza o tempo pausado)
+            //depois, formata, com base no tempo capturado, os millisegundos em segundos e minutos.
             val timeInMilliseconds = SystemClock.elapsedRealtime() - startTime
             val updatedTime = elapsedTime + timeInMilliseconds
             val seconds = (updatedTime / 1000).toInt()
             val minutes = seconds / 60
             val milliseconds = (updatedTime % 1000).toInt()
             val secondsDisplay = seconds % 60
+            //define o formato do cronometro, com 3 casas no milisegundos, atribuindo para cada tipo de Integer, uma variável formatada
             val timerText =
                 String.format("%02d:%02d:%03d", minutes, secondsDisplay, milliseconds)
             timeTextView.text = timerText
+            //define o tempo de atualização, com delay de 0 milisegundos.
             handler.postDelayed(this, 0)
         }
     }
