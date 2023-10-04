@@ -1,5 +1,7 @@
 package com.example.cronometrocorreto
 //https://developer.android.com/training/data-storage/shared-preferences?hl=pt-br
+import android.content.Context
+import android.content.Intent
 import android.icu.util.TimeUnit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +26,10 @@ class MainActivity : AppCompatActivity() {
     private var elapsedTime: Long = 0
     private val handler = Handler()
 
+    val SHARED: String = "sharedPrefs"
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,6 +39,23 @@ class MainActivity : AppCompatActivity() {
         resetButton = findViewById(R.id.resetButton)
         noteButton = findViewById(R.id.noteButton)
         timeLog = findViewById(R.id.timeLog)
+        val campoNome: TextView = findViewById(R.id.textView2)
+
+        val sharedPreferences = applicationContext.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val valor = sharedPreferences.getString("name","desconhecido")
+
+        if(valor!!.isEmpty()){
+            campoNome.setText("Olá, desconhecido")
+        }else{
+            campoNome.setText("Olá, "+valor)
+        }
+
+
+        val button = findViewById<Button>(R.id.return_button)
+        button.setOnClickListener {
+            Toast.makeText(this, R.string.returning, Toast.LENGTH_SHORT).show()
+            finish()
+        }
 
         startButton.setOnClickListener {
             if (!isRunning) {

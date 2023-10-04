@@ -10,4 +10,8 @@
     <string name="note_button">volta</string>
     <string name="time_log">tempos</string>
     <string name="lap_count">volta adicionada</string>
+    <string name="button_chronometer">cronometro</string>
+    <string name="return_button">retornar</string>
+    <string name="returning">voltando</string>
+    <string name="name_field">nome</string>
 </resources>
