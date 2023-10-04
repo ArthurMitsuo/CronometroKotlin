@@ -57,6 +57,7 @@ class Temporizado : AppCompatActivity() {
     private fun startTimer() {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         Toast.makeText(this, getString(if(isTimerRunning)R.string.timer_warn else R.string.working), Toast.LENGTH_SHORT).show()
+
         if (!isTimerRunning) {
             val timeInSeconds = timeInput.text.toString().toLong()
             val timeInMillis = timeInSeconds * 1000
@@ -66,7 +67,7 @@ class Temporizado : AppCompatActivity() {
                     secondsRemaining = millisUntilFinished / 1000
                     minutesRemaining = secondsRemaining/60
                     val seconds = secondsRemaining%60
-                    //timerTextView.text = secondsRemaining.toString()
+
                     timerTextView.text = String.format("%02d:%02d", minutesRemaining, seconds)
                 }
 

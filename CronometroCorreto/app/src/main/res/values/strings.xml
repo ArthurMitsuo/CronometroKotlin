@@ -16,4 +16,5 @@
     <string name="name_field">name</string>
     <string name="timer_input">type a number (in seconds) to countdown</string>
     <string name="timer_warn">already running</string>
+    <string name="finished">timer finished</string>
 </resources>
