@@ -1,6 +1,7 @@
 package com.example.cronometrocorreto
 
 import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import android.os.Vibrator
+import android.os.VibrationEffect
 //import android.media.MediaPlayer
 
 class Temporizado : AppCompatActivity() {
@@ -50,13 +52,10 @@ class Temporizado : AppCompatActivity() {
         }else{
             campoNome.setText("Olá, "+valor)
         }
-
-        if (vibrator.hasVibrator()) {
-            vibrator.vibrate(1000)
-        }
     }
 
     private fun startTimer() {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         Toast.makeText(this, getString(if(isTimerRunning)R.string.timer_warn else R.string.working), Toast.LENGTH_SHORT).show()
         if (!isTimerRunning) {
             val timeInSeconds = timeInput.text.toString().toLong()
@@ -74,6 +73,15 @@ class Temporizado : AppCompatActivity() {
                 override fun onFinish() {
                     timerTextView.text = "Tempo encerrado!"
                     isTimerRunning = false
+
+                    //https://www.tutorialspoint.com/how-to-make-an-android-device-vibrate-programmatically-using-kotlin
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(1000,
+                            VibrationEffect.DEFAULT_AMPLITUDE))
+                    }
+                    else {
+                        vibrator.vibrate(1000)
+                    }
                 }
 
             }

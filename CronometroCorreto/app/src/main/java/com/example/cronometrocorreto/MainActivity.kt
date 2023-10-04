@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //busca os id's no activity_main para serem atribuídos a suas variáveis distintas
         timeTextView = findViewById(R.id.chronometer)
         startButton = findViewById(R.id.startButton)
         resetButton = findViewById(R.id.resetButton)
@@ -69,7 +70,11 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     startTime = SystemClock.elapsedRealtime() - elapsedTime
                 }
+
+                //delay definido em 0 milisegundos
                 handler.postDelayed(updateTimer, 0)
+
+                //permite que os botões de reset e de note sejam utiliuzáveis, assim como muda o estado da varioável booleana para true
                 resetButton.isEnabled = true
                 noteButton.isEnabled = true
                 isRunning = true
@@ -80,12 +85,15 @@ class MainActivity : AppCompatActivity() {
                 noteButton.isEnabled = true
                 isRunning = false
             }
+            //mostra um Toast a depender do estado da variável isRunnning, assim como muda o nome do botão start para pause ou vice e versa.
             Toast.makeText(this, getString(if(isRunning)R.string.working else R.string.stopped), Toast.LENGTH_SHORT).show()
             startButton.setText(if(!isRunning){R.string.start_button} else {R.string.pause_button})
         }
 
 
         resetButton.setOnClickListener {
+            //Caso reset seja clicado, tira o callback que atualiza o timer e muda os valores para zero, assim como os valores de voltas anotados
+            //Habilita apenas o botão de start para iniciar tudo de novo
             handler.removeCallbacks(updateTimer)
             elapsedTime = 0
             timeTextView.text = "00:00:000"
@@ -95,11 +103,14 @@ class MainActivity : AppCompatActivity() {
             noteButton.isEnabled = false
             isRunning = false
 
+            //indica em TOAST que foi resetado
             Toast.makeText(this, R.string.reset, Toast.LENGTH_SHORT).show()
             startButton.setText(if(!isRunning){R.string.start_button} else {R.string.pause_button})
         }
 
         noteButton.setOnClickListener {
+            //Caso seja clicado o botão "volta", pega o valor atual, quando no click e os valores anteriores salvos, ou não, como toString
+            //Então, formata eles para incluir quebra de linha, montando uma anotação estilo horizontal.
             val currentTime = timeTextView.text.toString()
             val previousTimeLog = timeLog.text.toString()
             val newTimeLog = "$previousTimeLog\n$currentTime"
@@ -109,6 +120,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //funcuionalidade utilizando o objeto updateTimer do tipo da classe Runnable, onde muda o estado do relógio a cada atualização.
+    //atualização esta que foi definida no handler como sendo a cada 0 milisegundos (incremento em milisegundos)
     private val updateTimer = object : Runnable {
         override fun run() {
             val timeInMilliseconds = SystemClock.elapsedRealtime() - startTime
