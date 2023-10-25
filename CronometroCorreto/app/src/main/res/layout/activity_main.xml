@@ -64,9 +64,19 @@
         android:id="@+id/return_button"
         android:layout_width="140dp"
         android:layout_height="80dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="36dp"
         android:text="@string/return_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/times_button"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/times_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var resetButton: Button
     private lateinit var noteButton: Button
     private lateinit var timeLog: TextView
+    private lateinit var timeButton: Button
     private var isRunning = false
     private var startTime: Long = 0
     private var elapsedTime: Long = 0
@@ -36,9 +37,6 @@ class MainActivity : AppCompatActivity() {
     private var timesList = mutableListOf<String>()
     private lateinit var personName :String
 
-    //FirebaseApp.initializeApp()
-
-    //var storageReference = Firebase.storage
     private val storage = FirebaseStorage.getInstance()
     private val storageRef = storage.getReference()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         startButton = findViewById(R.id.startButton)
         resetButton = findViewById(R.id.resetButton)
         noteButton = findViewById(R.id.noteButton)
+        timeButton = findViewById(R.id.times_button)
         timeLog = findViewById(R.id.timeLog)
         val campoNome: TextView = findViewById(R.id.textView2)
 
@@ -129,6 +128,7 @@ class MainActivity : AppCompatActivity() {
             val byteArray = objetoJSON.toByteArray(Charset.defaultCharset())
 
             val ref = storageRef.child("files/" +person.getName()+".json")
+            //val ref = storageRef.child("files/")
 
 
             Toast.makeText(this, person.getName(), Toast.LENGTH_SHORT).show()
@@ -162,6 +162,11 @@ class MainActivity : AppCompatActivity() {
             timesList.add(currentTime);
 
             Toast.makeText(this, R.string.lap_count, Toast.LENGTH_SHORT).show()
+        }
+
+        timeButton.setOnClickListener{
+            val intent = Intent(this, Times::class.java)
+            startActivity(intent)
         }
     }
 

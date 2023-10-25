@@ -20,4 +20,10 @@
     <string name="finished">timer finalizou</string>
     <string name="failed_upload">upload falhou</string>
     <string name="succeded_upload">upload funcionou</string>
+    <string name="succeded_download">download funcionou</string>
+    <string name="failed_download">download falhou</string>
+    <string name="failed_erase">apagar falhou</string>
+    <string name="succeded_erase">apagar funcionou</string>
+    <string name="times_button">ver tempos</string>
+    <string name="erase_button">apagar tudo</string>
 </resources>

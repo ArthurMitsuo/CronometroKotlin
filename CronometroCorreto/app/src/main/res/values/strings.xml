@@ -19,4 +19,10 @@
     <string name="finished">timer finished</string>
     <string name="failed_upload">upload failed</string>
     <string name="succeded_upload">upload succeded</string>
+    <string name="succeded_download">download succeded</string>
+    <string name="failed_download">download failed</string>
+    <string name="failed_erase">erase failed</string>
+    <string name="succeded_erase">erase worked</string>
+    <string name="times_button">see times</string>
+    <string name="erase_button">erase everything</string>
 </resources>
