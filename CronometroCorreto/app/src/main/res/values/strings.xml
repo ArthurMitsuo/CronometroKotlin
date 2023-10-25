@@ -17,4 +17,6 @@
     <string name="timer_input">type a number (in seconds) to countdown</string>
     <string name="timer_warn">already running</string>
     <string name="finished">timer finished</string>
+    <string name="failed_upload">upload failed</string>
+    <string name="succeded_upload">upload succeded</string>
 </resources>

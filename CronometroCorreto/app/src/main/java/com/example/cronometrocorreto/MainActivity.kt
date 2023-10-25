@@ -1,5 +1,6 @@
 package com.example.cronometrocorreto
 //https://developer.android.com/training/data-storage/shared-preferences?hl=pt-br
+import PersonModel
 import android.content.Context
 import android.content.Intent
 import android.icu.util.TimeUnit
@@ -12,7 +13,13 @@ import android.widget.Button
 import android.widget.Chronometer
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.FirebaseApp
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import org.w3c.dom.Text
+import java.nio.charset.Charset
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +33,14 @@ class MainActivity : AppCompatActivity() {
     private var startTime: Long = 0
     private var elapsedTime: Long = 0
     private val handler = Handler()
+    private var timesList = mutableListOf<String>()
+    private lateinit var personName :String
 
+    //FirebaseApp.initializeApp()
+
+    //var storageReference = Firebase.storage
+    private val storage = FirebaseStorage.getInstance()
+    private val storageRef = storage.getReference()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,10 +57,13 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = applicationContext.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val valor = sharedPreferences.getString("name","desconhecido")
 
+
         if(valor!!.isEmpty()){
             campoNome.setText("Olá, desconhecido")
+            personName = "Desconhecido";
         }else{
             campoNome.setText("Olá, "+valor)
+            personName = valor;
         }
 
 
@@ -105,8 +122,31 @@ class MainActivity : AppCompatActivity() {
             noteButton.isEnabled = false
             isRunning = false
 
+            //---------------------------
+            val person = PersonModel(personName, timesList);
+            val gson = Gson()
+            val objetoJSON = gson.toJson(person.getPerson())
+            val byteArray = objetoJSON.toByteArray(Charset.defaultCharset())
+
+            val ref = storageRef.child("files/" +person.getName()+".json")
+
+
+            Toast.makeText(this, person.getName(), Toast.LENGTH_SHORT).show()
+
+            var uploadTask = ref.putBytes(byteArray)
+            uploadTask.addOnFailureListener { e ->
+                Toast.makeText(this, R.string.failed_upload, Toast.LENGTH_SHORT).show()
+                print(e)
+            }.addOnSuccessListener { taskSnapshot ->
+                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                // ...
+                Toast.makeText(this, R.string.succeded_upload, Toast.LENGTH_SHORT).show()
+                val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
+            }
+            //---------------------------
+
             //indica em TOAST que foi resetado e muda o texto do botão de iniciar
-            Toast.makeText(this, R.string.reset, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, R.string.reset, Toast.LENGTH_SHORT).show()
             startButton.setText(if(!isRunning){R.string.start_button} else {R.string.pause_button})
         }
 
@@ -117,6 +157,9 @@ class MainActivity : AppCompatActivity() {
             val previousTimeLog = timeLog.text.toString()
             val newTimeLog = "$previousTimeLog\n$currentTime"
             timeLog.text = newTimeLog
+
+            //adiciona o tempo atual na lista mutável, para depois inserir no Firebase Storage
+            timesList.add(currentTime);
 
             Toast.makeText(this, R.string.lap_count, Toast.LENGTH_SHORT).show()
         }

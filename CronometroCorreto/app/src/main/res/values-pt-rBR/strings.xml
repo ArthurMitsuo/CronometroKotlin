@@ -18,4 +18,6 @@
     <string name="timer_input">digite o tempo, em segundos, para contagem regressiva</string>
     <string name="timer_warn">já está rodando</string>
     <string name="finished">timer finalizou</string>
+    <string name="failed_upload">upload falhou</string>
+    <string name="succeded_upload">upload funcionou</string>
 </resources>
