@@ -40,8 +40,9 @@ class MainActivity<DataBasereference> : AppCompatActivity() {
     private var timesList = mutableListOf<String>()
     private lateinit var personName :String
 
+    //Define uma data class, os tempos serão salvos dentro dela, o ID será o nome do user
     @IgnoreExtraProperties
-    data class User(/*val username: String? = null, */val times: List<String>? = null) { }
+    data class User(val times: List<String>? = null) { }
 // ...
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,12 +129,15 @@ class MainActivity<DataBasereference> : AppCompatActivity() {
 
             //--Bloco de salvar a pessoa e os tempos anotados no Firebase
 
+            //pega a referencia do banco de dados no Firebase
             val database = Firebase.database("https://cronometro-c0889-default-rtdb.firebaseio.com/");
+            //pega a referencia do "diretório/objeto" a salvar
             var myRef = database.getReference("users")
 
-            //Instancia a Data Class criada mais acima
+            //Instancia a Data Class criada acima
             val novoUsuario = User(times = timesList)
 
+            //Define que vai salvar o nome do usuário como "chave" e os tempos salvos como "valores"
             myRef.child(personName).setValue(novoUsuario)
                 .addOnSuccessListener {
                     Toast.makeText(this, R.string.succeded_upload, Toast.LENGTH_SHORT).show()
@@ -144,8 +148,7 @@ class MainActivity<DataBasereference> : AppCompatActivity() {
 
             //---------------------------
 
-            //indica em TOAST que foi resetado e muda o texto do botão de iniciar
-            //Toast.makeText(this, R.string.reset, Toast.LENGTH_SHORT).show()
+
             startButton.setText(if(!isRunning){R.string.start_button} else {R.string.pause_button})
         }
 
