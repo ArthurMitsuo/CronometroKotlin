@@ -26,4 +26,5 @@
     <string name="succeded_erase">apagar funcionou</string>
     <string name="times_button">ver tempos</string>
     <string name="erase_button">apagar tudo</string>
+    <string name="nothing_found">nada encontrado</string>
 </resources>

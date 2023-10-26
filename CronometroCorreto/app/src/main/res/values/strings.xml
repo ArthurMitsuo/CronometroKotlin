@@ -25,4 +25,5 @@
     <string name="succeded_erase">erase worked</string>
     <string name="times_button">see times</string>
     <string name="erase_button">erase everything</string>
+    <string name="nothing_found">nothing found</string>
 </resources>

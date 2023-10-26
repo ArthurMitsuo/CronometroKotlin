@@ -8,11 +8,12 @@
 
     <TextView
         android:id="@+id/times"
-        android:layout_width="wrap_content"
+        android:layout_width="800px"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="260dp"
-        android:textSize="30sp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="264dp"
+        android:textSize="20sp"
+        android:text=" "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

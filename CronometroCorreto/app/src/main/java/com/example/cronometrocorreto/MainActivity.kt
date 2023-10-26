@@ -14,6 +14,8 @@ import android.widget.Chronometer
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.FirebaseApp
+import com.google.firebase.database.IgnoreExtraProperties
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
@@ -22,7 +24,7 @@ import org.w3c.dom.Text
 import java.nio.charset.Charset
 import java.util.Locale
 
-class MainActivity : AppCompatActivity() {
+class MainActivity<DataBasereference> : AppCompatActivity() {
     //criação das variáveis globais, privadas, para uso.
     private lateinit var timeTextView: TextView
     private lateinit var startButton: Button
@@ -34,11 +36,14 @@ class MainActivity : AppCompatActivity() {
     private var startTime: Long = 0
     private var elapsedTime: Long = 0
     private val handler = Handler()
+
     private var timesList = mutableListOf<String>()
     private lateinit var personName :String
 
-    private val storage = FirebaseStorage.getInstance()
-    private val storageRef = storage.getReference()
+    @IgnoreExtraProperties
+    data class User(/*val username: String? = null, */val times: List<String>? = null) { }
+// ...
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -121,28 +126,22 @@ class MainActivity : AppCompatActivity() {
             noteButton.isEnabled = false
             isRunning = false
 
-            //---------------------------
-            val person = PersonModel(personName, timesList);
-            val gson = Gson()
-            val objetoJSON = gson.toJson(person.getPerson())
-            val byteArray = objetoJSON.toByteArray(Charset.defaultCharset())
+            //--Bloco de salvar a pessoa e os tempos anotados no Firebase
 
-            val ref = storageRef.child("files/" +person.getName()+".json")
-            //val ref = storageRef.child("files/")
+            val database = Firebase.database("https://cronometro-c0889-default-rtdb.firebaseio.com/");
+            var myRef = database.getReference("users")
 
+            //Instancia a Data Class criada mais acima
+            val novoUsuario = User(times = timesList)
 
-            Toast.makeText(this, person.getName(), Toast.LENGTH_SHORT).show()
+            myRef.child(personName).setValue(novoUsuario)
+                .addOnSuccessListener {
+                    Toast.makeText(this, R.string.succeded_upload, Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, R.string.failed_upload, Toast.LENGTH_SHORT).show()
+                }
 
-            var uploadTask = ref.putBytes(byteArray)
-            uploadTask.addOnFailureListener { e ->
-                Toast.makeText(this, R.string.failed_upload, Toast.LENGTH_SHORT).show()
-                print(e)
-            }.addOnSuccessListener { taskSnapshot ->
-                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-                // ...
-                Toast.makeText(this, R.string.succeded_upload, Toast.LENGTH_SHORT).show()
-                val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
-            }
             //---------------------------
 
             //indica em TOAST que foi resetado e muda o texto do botão de iniciar
@@ -190,6 +189,10 @@ class MainActivity : AppCompatActivity() {
             handler.postDelayed(this, 0)
         }
     }
+    /*@IgnoreExtraProperties
+    data class Person(val username: String? = null, val times: List<String>? = null) {
+
+    }*/
 }
 
 
