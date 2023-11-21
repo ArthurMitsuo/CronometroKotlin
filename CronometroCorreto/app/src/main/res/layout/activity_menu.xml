@@ -4,37 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".Menu">
 
     <Button
         android:id="@+id/button_chronometer"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="154dp"
         android:layout_height="95dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="472dp"
         android:text="@string/button_chronometer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_timer"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="154dp"
         android:layout_height="95dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="156dp"
         android:text="@string/button_timer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_chronometer" />
+        app:layout_constraintTop_toBottomOf="@+id/name_field" />
 
     <EditText
         android:id="@+id/name_field"
-        android:layout_width="295dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="337dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="240dp"
         android:ems="10"
         android:hint="@string/name_field"
         android:inputType="text"
+        android:textColor="#E3DDDD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

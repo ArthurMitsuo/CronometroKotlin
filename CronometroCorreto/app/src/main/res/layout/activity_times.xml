@@ -4,35 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".Times">
 
     <TextView
         android:id="@+id/times"
         android:layout_width="800px"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="264dp"
-        android:textSize="20sp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="156dp"
+        android:contentDescription="Janela que mostra os tempos salvos no Firebase"
+        android:hint="Placeholder"
         android:text=" "
+        android:textColor="#E3DDDD"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/return_button"
-        android:layout_width="131dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="72dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="130dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/return_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/erase_button"
-        android:layout_width="131dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="72dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="146dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="564dp"
         android:text="@string/erase_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

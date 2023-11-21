@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "565369000397",
+    "project_id": "cronometro-c0889",
+    "storage_bucket": "cronometro-c0889.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565369000397:android:308a026e64dcb2fedeb484",
+        "android_client_info": {
+          "package_name": "com.example.cronometrocorreto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2Tw3W3x3tPKl7xPPAjFVjBvbexzKXkaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

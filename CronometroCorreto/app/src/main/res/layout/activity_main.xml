@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".MainActivity">
 
     <TextView
@@ -15,6 +16,7 @@
         android:layout_marginTop="277dp"
         android:gravity="center"
         android:text="00:00:000"
+        android:textColor="#E3DDDD"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,29 +24,34 @@
 
     <Button
         android:id="@+id/resetButton"
-        android:layout_width="128dp"
-        android:layout_height="78dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="131dp"
+        android:layout_height="79dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="29dp"
+        android:background="#C95F82C6"
+        android:shadowRadius="5"
         android:text="@string/reset_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chronometer" />
 
     <Button
         android:id="@+id/noteButton"
-        android:layout_width="128dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="141dp"
-        android:layout_marginTop="20dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="137dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="16dp"
         android:text="@string/note_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resetButton" />
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="128dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="220dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="139dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="212dp"
         android:layout_marginTop="28dp"
         android:text="@string/start_button"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,30 +59,33 @@
 
     <TextView
         android:id="@+id/timeLog"
-        android:layout_width="266dp"
-        android:layout_height="115dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="124dp"
+        android:layout_width="313dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="132dp"
         android:text="@string/time_log"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resetButton" />
 
     <Button
         android:id="@+id/return_button"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="36dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="130dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/return_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/times_button"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="220dp"
-        android:layout_marginTop="36dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="129dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="464dp"
         android:text="@string/times_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

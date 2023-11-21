@@ -4,24 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".Temporizado">
 
     <EditText
         android:id="@+id/timeInput"
-        android:layout_width="416dp"
-        android:layout_height="84dp"
-        android:layout_marginTop="224dp"
+        android:layout_width="359dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="180dp"
         android:hint="@string/timer_input"
-        app:layout_constraintStart_toStartOf="parent"
         android:inputType="number"
+        android:textColor="#E3DDDD"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="128dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="144dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="152dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="168dp"
         android:text="@string/start_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeInput" />
@@ -32,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
         android:layout_marginTop="349dp"
-        android:text=""
         android:gravity="center"
+        android:text=""
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +45,11 @@
 
     <Button
         android:id="@+id/return_button"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="32dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="130dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="16dp"
         android:text="@string/return_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,9 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="132dp"
         android:layout_marginTop="37dp"
-        android:textSize="25dp"
         android:gravity="center"
         android:textAlignment="center"
+        android:textSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/return_button" />
 
